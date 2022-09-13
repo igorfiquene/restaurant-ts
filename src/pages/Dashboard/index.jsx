@@ -8,14 +8,18 @@ import ModalEditFood from '../../components/ModalEditFood';
 import { FoodsContainer } from './styles';
 
 function Dashboard() {
-  const [foods, setFoods] = useState()
-  const [editingFood, setEditingFood] = useState()
-  const [modalOpen, setModalOpen] = useState()
-  const [editModalOpen, setEditModalOpen] = useState()
+  const [foods, setFoods] = useState('')
+  const [editingFood, setEditingFood] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
 
-  useEffect(async () => {
-    const response = await api.get('/foods');
-    setFoods(response.data)
+  useEffect(() => {
+    async function fetchData() {
+      const response = await api.get('/foods');
+      setFoods(response.data)
+    }
+
+    fetchData()
   }, [])
 
   const handleAddFood = async food => {
@@ -32,8 +36,6 @@ function Dashboard() {
   }
 
   const handleUpdateFood = async food => {
-    const { foods, editingFood } = this.state;
-
     try {
       const foodUpdated = await api.put(
         `/foods/${editingFood.id}`,
@@ -59,16 +61,16 @@ function Dashboard() {
   }
 
   const toggleModal = () => {
-    setModalOpen((prevState) => !prevState)
+    setModalOpen((prev) => !prev)
   }
 
   const toggleEditModal = () => {
-    setEditModalOpen(prev => !prev)
+    setEditModalOpen((prev) => !prev)
   }
-
+  
   const handleEditFood = food => {
     setEditingFood(food)
-    setModalOpen(true)
+    setEditModalOpen(true)
   }
 
   return (
