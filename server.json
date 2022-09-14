@@ -1,11 +1,11 @@
 {
   "foods": [
     {
-      "image": "",
-      "name": "asdasd",
-      "price": "",
-      "description": "",
-      "available": true,
+      "image": "https://picsum.photos/200/300",
+      "name": "Macarronada",
+      "price": "30",
+      "description": "Macarrão",
+      "available": false,
       "id": 1
     }
   ]
